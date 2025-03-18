@@ -53,7 +53,6 @@ public class App {
     }
 
     public static void battleGame(Karakter player, Karakter flint, Karakter maddy, Karakter enemy, int turn, int jumlahPemain){
-        System.out.println(turn);
         System.out.println("===== Battle =====");
         System.out.println(enemy.getName() + "[HP:" + enemy.getHp() + "/" + enemy.getMaxHp() + "]");
         System.out.println("-- vs");
@@ -66,20 +65,34 @@ public class App {
                 maddyTurn(player, flint, maddy);
             }
         } else if(jumlahPemain == 2){
-            if(turn == 1 && player.getHp() > 0){
-                playerTurn(player, flint, maddy);
-            } else if(turn == 2 && flint.getHp() > 0){
-                flintTurn(player, flint, maddy);
-            } else if(turn == 2 && maddy.getHp() > 0){
-                maddyTurn(player, flint, maddy);
+            if(player.getHp() > 0 && flint.getHp() > 0){
+                if(turn == 1){
+                    playerTurn(player, flint, maddy);
+                } else {
+                    flintTurn(player, flint, maddy);
+                }
+            } else if(player.getHp() > 0 && maddy.getHp() > 0){
+                if(turn == 1){
+                    playerTurn(player, flint, maddy);
+                } else {
+                    maddyTurn(player, flint, maddy);
+                }
+            } else if(flint.getHp() > 0 && maddy.getHp() > 0){
+                if(turn == 1){
+                    flintTurn(player, flint, maddy);
+                } else {
+                    maddyTurn(player, flint, maddy);
+                }
             }
         } else if(jumlahPemain >= 3){
-            if(turn == 1 && player.getHp() > 0){
-                playerTurn(player, flint, maddy);
-            } else if(turn == 2 && flint.getHp() > 0){
-                flintTurn(player, flint, maddy);
-            } else if(turn == 3 && maddy.getHp() > 0){
-                maddyTurn(player, flint, maddy);
+            if(player.getHp() > 0 && flint.getHp() > 0 && maddy.getHp() > 0){
+                if(turn == 1){
+                    playerTurn(player, flint, maddy);
+                } else if(turn == 2){
+                    flintTurn(player, flint, maddy);
+                } else {
+                    maddyTurn(player, flint, maddy);
+                }
             }
         }
     }
@@ -129,26 +142,43 @@ public class App {
                 enemyAttack(enemy, maddy, inputPlay);
             }
         } else if(jumlahPemain == 2){
-            if(turn == 1 && player.getHp() > 0){
-                battleGameInput(enemy, player, inputPlay);
-                enemyAttack(enemy, player, inputPlay);
-            } else if(turn == 2 && flint.getHp() > 0){
-                battleGameInput(enemy, flint, inputPlay);
-                enemyAttack(enemy, flint, inputPlay);
-            } else if(turn == 2 && maddy.getHp() > 0){
-                battleGameInput(enemy, maddy, inputPlay);
-                enemyAttack(enemy, maddy, inputPlay);
+            if(player.getHp() > 0 && flint.getHp() > 0){
+                if(turn == 1){
+                    battleGameInput(enemy, player, inputPlay);
+                    enemyAttack(enemy, player, inputPlay);
+                } else {
+                    battleGameInput(enemy, flint, inputPlay);
+                    enemyAttack(enemy, flint, inputPlay);
+                }
+            } else if(player.getHp() > 0 && maddy.getHp() > 0){
+                if(turn == 1){
+                    battleGameInput(enemy, player, inputPlay);
+                    enemyAttack(enemy, player, inputPlay);
+                } else {
+                    battleGameInput(enemy, maddy, inputPlay);
+                    enemyAttack(enemy, maddy, inputPlay);
+                }
+            } else if(flint.getHp() > 0 && maddy.getHp() > 0){
+                if(turn == 1){
+                    battleGameInput(enemy, flint, inputPlay);
+                    enemyAttack(enemy, flint, inputPlay);
+                } else {
+                    battleGameInput(enemy, maddy, inputPlay);
+                    enemyAttack(enemy, maddy, inputPlay);
+                }
             }
         } else if(jumlahPemain == 3){
-            if(turn == 1 && player.getHp() > 0){
-                battleGameInput(enemy, player, inputPlay);
-                enemyAttack(enemy, player, inputPlay);
-            } else if(turn == 2 && flint.getHp() > 0){
-                battleGameInput(enemy, flint, inputPlay);
-                enemyAttack(enemy, flint, inputPlay);
-            } else if(turn == 3 && maddy.getHp() > 0){
-                battleGameInput(enemy, maddy, inputPlay);
-                enemyAttack(enemy, maddy, inputPlay);
+            if(player.getHp() > 0 && flint.getHp() > 0 && maddy.getHp() > 0){
+                if(turn == 1){
+                    battleGameInput(enemy, player, inputPlay);
+                    enemyAttack(enemy, player, inputPlay);
+                } else if(turn == 2){
+                    battleGameInput(enemy, flint, inputPlay);
+                    enemyAttack(enemy, flint, inputPlay);
+                } else {
+                    battleGameInput(enemy, maddy, inputPlay);
+                    enemyAttack(enemy, maddy, inputPlay);
+                }
             }
         }
     }
@@ -161,7 +191,7 @@ public class App {
         int menu1, menuShop, menuHeal;
         String inputPlay;
         int gold = 100;
-        int jumlahPemain = 1;
+        int jumlahPemain = 0;
         Karakter player = null;
         Karakter flint = new Karakter("Flint", 0, 80, 30, 30, false);
         Karakter maddy = new Karakter("Maddy", 0, 60, 40, 40, false);
@@ -194,6 +224,7 @@ public class App {
             if(!nama.equals("Flint") && !nama.equals("Maddy") && nama.length() >= 5){
                 namaBenar = true;
                 player = new Karakter(nama, 120, 120, 20, 20, true);
+                jumlahPemain++;
             } else {
                 System.out.println("Invalid Name");
             }
@@ -252,6 +283,7 @@ public class App {
                     maddy.setUnlocked(true);
                     maddy.setHp(flint.getMaxHp());
                     System.out.println("Successfully unlock all characters.");
+                    jumlahPemain+=2;
                 }
             } while (menu1 < 1 || menu1 > 4 && menu1 != 888 && menu1 != 111 && menu1 != 333 && menu1 != 444);
             
@@ -479,8 +511,25 @@ public class App {
                             System.out.println("Game Over !!!");
                         }
                         if(isWin){
-                            System.out.println("You Win !!!");
+                            goblin.setHp(goblin.getMaxHp());
+                            goblin.setUnlocked(true);;
+                            minotour.setHp(minotour.getMaxHp());
+                            minotour.setUnlocked(true);
+                            flintEnemy.setHp(flintEnemy.getMaxHp());
+                            flintEnemy.setUnlocked(true);
+                            maddyEnemy.setHp(maddyEnemy.getMaxHp());
+                            maddyEnemy.setUnlocked(true);
                             dragon.setHp(dragon.getMaxHp());
+                            dragon.setUnlocked(true);
+
+                            player.setHp(player.getMaxHp());
+                            player.setUnlocked(true);
+                            flint.setHp(0);
+                            flint.setUnlocked(false);
+                            maddy.setHp(0);
+                            maddy.setUnlocked(false);
+                            jumlahPemain = 1;
+                            System.out.println("You Win !!!");
                         }
                         if(isLucky && getEnemy == 0){
                             int getGold = 0;

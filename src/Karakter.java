@@ -1,39 +1,66 @@
 public class Karakter {
-    private String nama;
-    private int hpAwal;
-    private int hpSekarang;
+    private String name;
+    private int hp;
+    private int maxHp;
     private int attack;
+    private int attackNoBuff;
+    private boolean isUnlocked;
 
-    public Karakter(String nama, int hpAwal, int hpSekarang, int attack) {
-        this.nama = nama;
-        this.hpAwal = hpAwal;
-        this.hpSekarang = hpSekarang;
+    public Karakter(String name, int hp, int maxHp, int attack, int attackNoBuff, boolean isUnlocked) {
+        this.name = name;
+        this.hp = hp;
+        this.maxHp = maxHp;
         this.attack = attack;
+        this.attackNoBuff = attackNoBuff;
+        this.isUnlocked = isUnlocked;
     }
 
-    public String getNama() {
-        return nama;
+    public String getName() {
+        return name;
     }
-    public void setNama(String nama) {
-        this.nama = nama;
+
+    public void setName(String name) {
+        this.name = name;
     }
-    public int getHpAwal() {
-        return hpAwal;
+
+    public int getHp() {
+        return hp;
     }
-    public void setHpAwal(int hpAwal) {
-        this.hpAwal = hpAwal;
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
-    public int getHpSekarang() {
-        return hpSekarang;
+
+    public int getMaxHp() {
+        return maxHp;
     }
-    public void setHpSekarang(int hpSekarang) {
-        this.hpSekarang = hpSekarang;
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
     }
+
     public int getAttack() {
         return attack;
     }
+
     public void setAttack(int attack) {
         this.attack = attack;
+    }
+
+    public int getAttackNoBuff() {
+        return attackNoBuff;
+    }
+
+    public void setAttackNoBuff(int attackNoBuff) {
+        this.attackNoBuff = attackNoBuff;
+    }
+
+    public boolean isUnlocked() {
+        return isUnlocked;
+    }
+
+    public void setUnlocked(boolean isUnlocked) {
+        this.isUnlocked = isUnlocked;
     }
 
 }

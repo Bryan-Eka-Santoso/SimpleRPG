@@ -53,6 +53,7 @@ public class App {
     }
 
     public static void battleGame(Karakter player, Karakter flint, Karakter maddy, Karakter enemy, int turn, int jumlahPemain){
+        System.out.println(turn);
         System.out.println("===== Battle =====");
         System.out.println(enemy.getName() + "[HP:" + enemy.getHp() + "/" + enemy.getMaxHp() + "]");
         System.out.println("-- vs");
@@ -67,12 +68,6 @@ public class App {
         } else if(jumlahPemain == 2){
             if(turn == 1 && player.getHp() > 0){
                 playerTurn(player, flint, maddy);
-            } else if(turn == 1 && flint.getHp() > 0){
-                flintTurn(player, flint, maddy);
-            } else if(turn == 1 && maddy.getHp() > 0){
-                maddyTurn(player, flint, maddy);
-            } else if(turn == 2 && player.getHp() > 0){
-                playerTurn(player, flint, maddy);
             } else if(turn == 2 && flint.getHp() > 0){
                 flintTurn(player, flint, maddy);
             } else if(turn == 2 && maddy.getHp() > 0){
@@ -81,19 +76,7 @@ public class App {
         } else if(jumlahPemain >= 3){
             if(turn == 1 && player.getHp() > 0){
                 playerTurn(player, flint, maddy);
-            } else if(turn == 1 && flint.getHp() > 0){
-                flintTurn(player, flint, maddy);
-            } else if(turn == 1 && maddy.getHp() > 0){
-                maddyTurn(player, flint, maddy);
-            } else if(turn == 2 && player.getHp() > 0){
-                playerTurn(player, flint, maddy);
             } else if(turn == 2 && flint.getHp() > 0){
-                flintTurn(player, flint, maddy);
-            } else if(turn == 2 && maddy.getHp() > 0){
-                maddyTurn(player, flint, maddy);
-            } else if(turn == 3 && player.getHp() > 0){
-                playerTurn(player, flint, maddy);
-            } else if(turn == 3 && flint.getHp() > 0){
                 flintTurn(player, flint, maddy);
             } else if(turn == 3 && maddy.getHp() > 0){
                 maddyTurn(player, flint, maddy);
@@ -156,7 +139,7 @@ public class App {
                 battleGameInput(enemy, maddy, inputPlay);
                 enemyAttack(enemy, maddy, inputPlay);
             }
-        } else if(jumlahPemain >= 3){
+        } else if(jumlahPemain == 3){
             if(turn == 1 && player.getHp() > 0){
                 battleGameInput(enemy, player, inputPlay);
                 enemyAttack(enemy, player, inputPlay);

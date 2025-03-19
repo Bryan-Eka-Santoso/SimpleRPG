@@ -311,32 +311,33 @@ public class App {
                     int turn = 1;
                     Boolean gameOver = false;
                     Boolean isWin = false;
+                    boolean isCanAttack = false;
 
                     do {
-                        boolean isCanAttack = false;
+                        getEnemy = rand.nextInt(4);
+
+                        if(getEnemy == 0 && minotour.isUnlocked() == true){
+                            isCanAttack = true;
+                        }
+                        if(getEnemy == 1 && goblin.isUnlocked() == true){
+                            isCanAttack = true;
+                        }
+                        if(getEnemy == 2 && flintEnemy.isUnlocked() == true){
+                            isCanAttack = true;
+                        }
+                        if(getEnemy == 3 && maddyEnemy.isUnlocked() == true){
+                            isCanAttack = true;
+                        }
+
+                    } while (!isCanAttack);
+
+                    if(flint.isUnlocked() == true && maddy.isUnlocked() == true){
+                        getEnemy = 4;
+                    }
+
+                    do {
                         int cekKosong = 0;
 
-                            do {
-                                getEnemy = rand.nextInt(4);
-
-                                if(getEnemy == 0 && minotour.isUnlocked() == true){
-                                    isCanAttack = true;
-                                }
-                                if(getEnemy == 1 && goblin.isUnlocked() == true){
-                                    isCanAttack = true;
-                                }
-                                if(getEnemy == 2 && flintEnemy.isUnlocked() == true){
-                                    isCanAttack = true;
-                                }
-                                if(getEnemy == 3 && maddyEnemy.isUnlocked() == true){
-                                    isCanAttack = true;
-                                }
-
-                            } while (!isCanAttack);
-
-                            if(flint.isUnlocked() == true && maddy.isUnlocked() == true){
-                                getEnemy = 4;
-                            }
 
                             if(isLucky) {
                                 if((getEnemy == 0 && minotour.isUnlocked()) || (getEnemy == 1 && goblin.isUnlocked())) {
@@ -420,54 +421,6 @@ public class App {
                                 }
                             }
 
-                            if(flintEnemy.getHp() <= 0 && afterNotifFlint == false){
-                                int getGold = 0;
-                                getGold = flintEnemy.getMaxHp() - flintEnemy.getAttack();
-                                flintEnemy.setUnlocked(false);
-                                flint.setUnlocked(true);
-                                flint.setHp(flint.getMaxHp());
-                                System.out.println("You defeted Flint.");
-                                System.out.println("Gained " + getGold + " Gold");
-                                System.out.println("Flint has joined your party!");
-                                afterNotifFlint = true;
-                                gold += getGold;
-                                jumlahPemain++;
-                            }
-
-                            if(maddyEnemy.getHp() <= 0 && afterNotifMaddy == false){
-                                int getGold = 0;
-                                getGold = maddyEnemy.getMaxHp() - maddyEnemy.getAttack();
-                                maddyEnemy.setUnlocked(false);
-                                maddy.setUnlocked(true);
-                                maddy.setHp(maddy.getMaxHp());
-                                System.out.println("You defeted Maddy.");
-                                System.out.println("Gained " + getGold + " Gold");
-                                System.out.println("Maddy has joined your party!");
-                                afterNotifMaddy = true;
-                                gold += getGold;
-                                jumlahPemain++;
-                            }
-
-                            if(goblin.getHp() <= 0 && afterNotifGoblin == false){
-                                int getGold = 0;
-                                getGold = goblin.getMaxHp() - goblin.getAttack();
-                                goblin.setUnlocked(false);
-                                System.out.println("You defeted Goblin.");
-                                System.out.println("Gained " + getGold + " Gold");
-                                afterNotifGoblin = true;
-                                gold += getGold;
-                            }
-
-                            if(minotour.getHp() <= 0 && afterNotifMinotour == false){
-                                int getGold = 0;
-                                getGold = minotour.getMaxHp() - minotour.getAttack();
-                                minotour.setUnlocked(false);
-                                System.out.println("You defeted Minotour.");
-                                System.out.println("Gained " + getGold + " Gold");
-                                afterNotifMinotour = true;
-                                gold += getGold;
-                            }
-
                             if(player.getHp() <= 0 && afterNotifPlayer == false && player.isUnlocked()){
                                 System.out.println("Your tim Player is die.");
                                 afterNotifPlayer = true;
@@ -484,6 +437,58 @@ public class App {
                                 System.out.println("Your tim Maddy is die.");
                                 afterNotifMaddyTim = true;
                                 jumlahPemain--;
+                            }
+
+                            if(flintEnemy.getHp() <= 0 && afterNotifFlint == false){
+                                int getGold = 0;
+                                getGold = flintEnemy.getMaxHp() - flintEnemy.getAttack();
+                                flintEnemy.setUnlocked(false);
+                                flint.setUnlocked(true);
+                                flint.setHp(flint.getMaxHp());
+                                System.out.println("You defeted Flint.");
+                                System.out.println("Gained " + getGold + " Gold");
+                                System.out.println("Flint has joined your party!");
+                                afterNotifFlint = true;
+                                gold += getGold;
+                                jumlahPemain++;
+                                break;
+                            }
+
+                            if(maddyEnemy.getHp() <= 0 && afterNotifMaddy == false){
+                                int getGold = 0;
+                                getGold = maddyEnemy.getMaxHp() - maddyEnemy.getAttack();
+                                maddyEnemy.setUnlocked(false);
+                                maddy.setUnlocked(true);
+                                maddy.setHp(maddy.getMaxHp());
+                                System.out.println("You defeted Maddy.");
+                                System.out.println("Gained " + getGold + " Gold");
+                                System.out.println("Maddy has joined your party!");
+                                afterNotifMaddy = true;
+                                gold += getGold;
+                                jumlahPemain++;
+                                break;
+                            }
+
+                            if(goblin.getHp() <= 0 && afterNotifGoblin == false){
+                                int getGold = 0;
+                                getGold = goblin.getMaxHp() - goblin.getAttack();
+                                goblin.setUnlocked(false);
+                                System.out.println("You defeted Goblin.");
+                                System.out.println("Gained " + getGold + " Gold");
+                                afterNotifGoblin = true;
+                                gold += getGold;
+                                break;
+                            }
+
+                            if(minotour.getHp() <= 0 && afterNotifMinotour == false){
+                                int getGold = 0;
+                                getGold = minotour.getMaxHp() - minotour.getAttack();
+                                minotour.setUnlocked(false);
+                                System.out.println("You defeted Minotour.");
+                                System.out.println("Gained " + getGold + " Gold");
+                                afterNotifMinotour = true;
+                                gold += getGold;
+                                break;
                             }
 
                             if(player.getHp() <= 0){
@@ -589,6 +594,7 @@ public class App {
                                         gold -= priceShop[menuShop-1];
                                         if(player.getHp() <= 0){
                                             jumlahPemain++;
+                                            afterNotifPlayer = false;
                                         }
                                         player.setHp(player.getMaxHp());
                                         System.out.println("Successfully bought a Healing Potion for the " + player.getName() + ".");
@@ -596,6 +602,7 @@ public class App {
                                         gold -= priceShop[menuShop-1];
                                         if(flint.getHp() <= 0){
                                             jumlahPemain++;
+                                            afterNotifFlintTim = false;
                                         }
                                         flint.setHp(flint.getMaxHp());
                                         System.out.println("Successfully bought a Healing Potion for the Flint.");
@@ -603,6 +610,7 @@ public class App {
                                         gold -= priceShop[menuShop-1];
                                         if(maddy.getHp() <= 0){
                                             jumlahPemain++;
+                                            afterNotifMaddyTim = false;
                                         }
                                         maddy.setHp(maddy.getMaxHp());
                                         System.out.println("Successfully bought a Healing Potion for the Maddy.");
